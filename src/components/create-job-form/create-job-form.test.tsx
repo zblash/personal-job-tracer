@@ -2,6 +2,12 @@ import React from 'react';
 import { render, act, screen, fireEvent, waitFor } from '@testing-library/react';
 import { CreateJobFormComponent } from '.';
 
+const options = [
+  { value: 'Urgent', label: 'Acil' },
+  { value: 'Normal', label: 'Normal' },
+  { value: 'Low', label: 'Az' },
+];
+
 jest.mock('react-select', () => ({ options, value, onChange }) => {
   function handleChange(e) {
     const option = options.find(option => option.value === e.currentTarget.value);
@@ -23,7 +29,7 @@ describe('CreateJobFormComponent', () => {
   it('should render errors on empty case', async () => {
     const onSubmitSpy = jest.fn();
 
-    render(<CreateJobFormComponent onSubmit={onSubmitSpy} />);
+    render(<CreateJobFormComponent options={options} onSubmit={onSubmitSpy} />);
     const buttonElement = screen.getByRole('button');
     expect(buttonElement).toBeInTheDocument();
 
@@ -37,7 +43,7 @@ describe('CreateJobFormComponent', () => {
   it('should return values on submit', async () => {
     const onSubmitSpy = jest.fn();
 
-    render(<CreateJobFormComponent onSubmit={onSubmitSpy} />);
+    render(<CreateJobFormComponent options={options} onSubmit={onSubmitSpy} />);
     const buttonElement = screen.getByRole('button');
     expect(buttonElement).toBeInTheDocument();
 

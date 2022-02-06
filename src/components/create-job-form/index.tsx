@@ -8,6 +8,7 @@ import { AiOutlinePlus } from 'react-icons/ai';
 
 export interface CreateJobFormComponentProps {
   onSubmit: (e: ICreateJobRequest) => void;
+  options: { value: string; label: string }[];
 }
 
 function CreateJobFormComponent(props: CreateJobFormComponentProps) {
@@ -17,11 +18,7 @@ function CreateJobFormComponent(props: CreateJobFormComponentProps) {
     formState: { errors },
     control,
   } = useForm();
-  const options = [
-    { value: 'Urgent', label: 'Acil' },
-    { value: 'Normal', label: 'Normal' },
-    { value: 'Low', label: 'Az' },
-  ];
+
   const onFormSubmit = React.useCallback(
     (s: { jobTitle: string; jobPriority: { value: string; label: string } }) => {
       props.onSubmit({ jobTitle: s.jobTitle, priority: s.jobPriority.value });
@@ -53,7 +50,7 @@ function CreateJobFormComponent(props: CreateJobFormComponentProps) {
             render={({ field: { onChange, value, ref }, fieldState: { error } }) => (
               <UISelect
                 labelClassName="font-weight-bold"
-                options={options}
+                options={props.options}
                 placeholderKey="Choose"
                 labelKey="Job Priority"
                 value={value}

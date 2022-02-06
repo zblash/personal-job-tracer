@@ -3,6 +3,8 @@ import { useTranslation } from 'react-i18next';
 import { UIInput } from '@/components/input';
 import { UIButton } from '@/components/button';
 import { UISelect } from '@/components/select';
+import { CreateJobFormComponent } from '@/components/create-job-form';
+import { ICreateJobRequest } from '@/utils/api/api-models';
 
 function HomePage() {
   /*
@@ -20,10 +22,17 @@ function HomePage() {
 
   return (
     <>
-      <UISelect labelKey="Test Select Label" options={options} />
-      <UIButton onClick={() => {}} className="btn btn-primary">
-        Create
-      </UIButton>
+      <div className="container">
+        <div className="col-12">
+          <h4>Create New Job</h4>
+        </div>
+        <CreateJobFormComponent
+          options={options}
+          onSubmit={(e: ICreateJobRequest) => {
+            console.log('Asd');
+          }}
+        />
+      </div>
     </>
   );
 }
