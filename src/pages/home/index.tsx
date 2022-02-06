@@ -5,7 +5,8 @@ import { UIButton } from '@/components/button';
 import { UISelect } from '@/components/select';
 import { CreateJobFormComponent } from '@/components/create-job-form';
 import { ICreateJobRequest } from '@/utils/api/api-models';
-
+import { UITableComponent } from '@/components/table';
+import { VscEdit, VscTrash } from 'react-icons/vsc';
 function HomePage() {
   /*
   HomePage Lifecycle
@@ -19,7 +20,12 @@ function HomePage() {
     { value: 'Normal', label: 'Normal' },
     { value: 'Low', label: 'Az' },
   ];
-
+  const values = [
+    { jobTitle: 'Urgent', priority: 'Acil' },
+    { jobTitle: 'Urgent', priority: 'Acil' },
+    { jobTitle: 'Urgent', priority: 'Acil' },
+    { jobTitle: 'Urgent', priority: 'Acil' },
+  ];
   return (
     <>
       <div className="container">
@@ -32,6 +38,48 @@ function HomePage() {
             console.log('Asd');
           }}
         />
+
+        <div className="row">
+          <UITableComponent
+            columns={[
+              {
+                Header: 'Name',
+                accessor: 'jobTitle',
+                sort: true,
+                sortType: 'desc',
+              },
+              {
+                Header: 'Priority',
+                accessor: 'priority',
+                sort: true,
+                sortType: 'desc',
+              },
+              {
+                Header: 'Action',
+                accessor: 'actions',
+                customRenderer: (item: { jobTitle: string; priority: string }) => {
+                  return (
+                    <>
+                      <UIButton>
+                        <VscEdit />
+                      </UIButton>
+                      <UIButton>
+                        <VscTrash />
+                      </UIButton>
+                    </>
+                  );
+                },
+              },
+            ]}
+            data={values}
+            onSortChange={e => {
+              console.log(e);
+            }}
+            onSortTypeChange={e => {
+              console.log(e);
+            }}
+          />
+        </div>
       </div>
     </>
   );
