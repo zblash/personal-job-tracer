@@ -8,8 +8,6 @@ const options = [
   { value: 'Low', label: 'Az' },
 ];
 
-jest.mock;
-
 jest.mock('react-select', () => ({ options, value, onChange }) => {
   function handleChange(e) {
     const option = options.find(option => option.value === e.currentTarget.value);

@@ -6,6 +6,9 @@ module.exports = {
       tsconfig: './tsconfig.jest.json',
     },
   },
+  moduleNameMapper: {
+    '^@/(.*)$': '<rootDir>/src/$1',
+  },
   setupFilesAfterEnv: ['./src/jest.setup.ts'],
   coverageThreshold: {
     global: {

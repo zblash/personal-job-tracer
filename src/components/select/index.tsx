@@ -39,8 +39,7 @@ function UISelect(props: UISelectProps) {
         options={props.options}
         placeholder={props.placeholderKey}
         value={props.value}
-        className={`op-select-container ${props.inputClassName}`}
-        classNamePrefix="op-select"
+        className={`${props.inputClassName || ''}`}
         components={{ DropdownIndicator }}
         onChange={props.onChange}
         isSearchable={props.isSearchable}
