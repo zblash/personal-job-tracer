@@ -8,12 +8,15 @@ interface UIButtonProps {
   radius?: string;
   width?: string;
   disabled?: boolean;
+  className?: string;
 }
-const UIButton = React.forwardRef<HTMLButtonElement, React.PropsWithChildren<UIButtonProps>>(props => {
+const UIButton = React.forwardRef<HTMLButtonElement, React.PropsWithChildren<UIButtonProps>>((props, btnRef) => {
   return (
     <button
       onClick={props.onClick}
       disabled={props.disabled}
+      className={props.className}
+      ref={btnRef}
       style={{
         border: props.border,
         borderRadius: props.radius,

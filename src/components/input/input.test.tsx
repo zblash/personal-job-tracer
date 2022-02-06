@@ -19,12 +19,12 @@ describe('UIInput', () => {
   });
 
   it('checks value changes', async () => {
-    const onType = jest.fn();
-    render(<UIInput name="test" value="Test" onType={onType} type="text" placeholderKey="Test Input" />);
+    const onTypeSpy = jest.fn();
+    render(<UIInput name="test" value="Test" onType={onTypeSpy} type="text" placeholderKey="Test Input" />);
     const inputElement = screen.getByPlaceholderText(/Test Input/i) as HTMLInputElement;
     expect(inputElement.value).toBe('Test');
     fireEvent.change(inputElement, { target: { value: 'Testing' } });
 
-    expect(onType).toHaveBeenCalled();
+    expect(onTypeSpy).toHaveBeenCalled();
   });
 });
