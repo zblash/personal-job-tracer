@@ -1,7 +1,7 @@
 {
-  "name": "react-typescript-boilerplate",
+  "name": "personal-job-tracer",
   "version": "1.0.0",
-  "description": "React SPA Boilerplate",
+  "description": "Personal Job Tracer App",
   "scripts": {
     "clean-dist": "rimraf dist/*",
     "build": "yarn run clean-dist && cross-env NODE_ENV=production webpack --config=webpack/production.js",
@@ -11,7 +11,7 @@
     "tsc": "tsc",
     "dev": "cross-env NODE_ENV=development webpack-dev-server --config=webpack/development.js",
     "start": "node server.js",
-    "test": "jest --coverage  --config=jest.json",
+    "test": "jest --coverage  --config=jest.config.js",
     "storybook": "cross-env NODE_ENV=development start-storybook -p 9009 -c stories/config -s public",
     "build-storybook": "cross-env NODE_ENV=development build-storybook -s public",
     "check-rule": "yarn tsc && yarn lint && yarn prettier && yarn test"
