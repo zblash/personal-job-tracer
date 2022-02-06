@@ -10,7 +10,7 @@ function HomePage() {
   HomePage Functions
   */
 
-  return z;
+  return <h1>HELLO</h1>;
 }
 
 const PureHomePage = React.memo(HomePage);
