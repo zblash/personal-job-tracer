@@ -50,4 +50,6 @@ const UIInput = React.forwardRef<HTMLInputElement, UIInputProps>(
   },
 );
 
-export { UIInput };
+const _UIInput = React.memo(UIInput);
+
+export { _UIInput as UIInput };

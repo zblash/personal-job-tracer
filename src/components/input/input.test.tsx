@@ -1,7 +1,6 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { UIInput } from '.';
-import userEvent from '@testing-library/user-event';
 
 describe('UIInput', () => {
   it('should render same text in label passed into labelKey', () => {
