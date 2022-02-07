@@ -10,8 +10,8 @@ import { useJobFilter } from '@/hooks/job-filter';
 function HomePage() {
   const options = [
     { value: 'Urgent', label: 'Acil' },
-    { value: 'Normal', label: 'Normal' },
-    { value: 'Low', label: 'Az' },
+    { value: 'Trivial', label: 'Normal' },
+    { value: 'Regular', label: 'Az' },
   ];
 
   const [sortType, setSortType] = React.useState<'asc' | 'desc'>('desc');
@@ -52,7 +52,7 @@ function HomePage() {
         <CreateJobFormComponent
           options={options}
           onSubmit={(e: ICreateJobRequest) => {
-            console.log('Asd');
+            setValues(prev => [...prev, e]);
           }}
         />
 

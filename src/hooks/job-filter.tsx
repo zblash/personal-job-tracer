@@ -19,23 +19,25 @@ export function useJobFilter(values: { jobTitle: string; priority: string }[]) {
   const [filteredValues, setFilteredValues] = useStateFromProp(values);
   const [isFiltered, setIsFiltered] = React.useState<boolean>(false);
 
-  const onFilterChanged = React.useCallback((keyword: string, e: { value: string; label: string }) => {
-    let vals = filteredValues;
-    let isTitleFiltered = false;
-    let isPriorityFiltered = false;
-    if (keyword.length > 2) {
-      vals = ArrayUtils.filterByField(vals, 'jobTitle', keyword);
-      isTitleFiltered = true;
-    }
-    if (e.value !== 'All') {
-      // eslint-disable-next-line testing-library/await-async-query
-      vals = ArrayUtils.findByField(vals, 'priority', e.value);
-      isPriorityFiltered = true;
-    }
-    setFilteredValues(vals);
-    setIsFiltered(isTitleFiltered || isPriorityFiltered);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const onFilterChanged = React.useCallback(
+    (keyword: string, e: { value: string; label: string }) => {
+      let vals = values;
+      let isTitleFiltered = false;
+      let isPriorityFiltered = false;
+      if (keyword.length > 2) {
+        vals = ArrayUtils.filterByField(vals, 'jobTitle', keyword);
+        isTitleFiltered = true;
+      }
+      if (e.value !== 'All') {
+        // eslint-disable-next-line testing-library/await-async-query
+        vals = ArrayUtils.findByField(vals, 'priority', e.value);
+        isPriorityFiltered = true;
+      }
+      setFilteredValues(vals);
+      setIsFiltered(isTitleFiltered || isPriorityFiltered);
+    },
+    [setFilteredValues, values],
+  );
 
   const renderFilter = React.useCallback(() => {
     return (
