@@ -186,7 +186,7 @@ function HomePage() {
           />
         </div>
       )}
-      {thereAreErrors && <h1>Error encountered.</h1>}
+      {thereAreErrors && <h1>Error encountered. Backend server not running</h1>}
     </>
   );
 }
