@@ -32,5 +32,14 @@ export const ArrayUtils = (function () {
   function sortDesc(arr, field) {
     return [...sortAsc(arr, field)].reverse();
   }
-  return { sortAsc, sortDesc };
+
+  function filterByField(arr, field, keyword) {
+    return [...arr].filter(arrField => arrField[field].includes(keyword));
+  }
+
+  function findByField(arr, field, keyword) {
+    return [...arr].filter(arrField => arrField[field] === keyword);
+  }
+
+  return { sortAsc, sortDesc, filterByField, findByField };
 })();

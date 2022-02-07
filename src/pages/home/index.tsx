@@ -5,28 +5,33 @@ import { ICreateJobRequest } from '@/utils/api/api-models';
 import { UITableComponent } from '@/components/table';
 import { VscEdit, VscTrash } from 'react-icons/vsc';
 import { ArrayUtils } from '@/utils/arrays';
+import { UIInput } from '@/components/input';
+import { UISelect } from '@/components/select';
+import { useJobFilter } from '@/hooks/job-filter';
 
 function HomePage() {
-  const [sortType, setSortType] = React.useState<'asc' | 'desc'>('desc');
-  const [sortBy, setSortBy] = React.useState('');
-  const [values, setValues] = React.useState([
-    { jobTitle: 'adaylarla ilgili teknik odev hazirlamam gerekiyor', priority: 'Urgent' },
-    { jobTitle: 'yapilan islere ilgili activity kayitlari olusturmak', priority: 'Trivial' },
-    { jobTitle: 'teknik tasklari planlayacagim', priority: 'Regular' },
-  ]);
-  /*
-  HomePage Lifecycle
-  */
-
-  /*
-  HomePage Functions
-  */
   const options = [
     { value: 'Urgent', label: 'Acil' },
     { value: 'Normal', label: 'Normal' },
     { value: 'Low', label: 'Az' },
   ];
 
+  const [sortType, setSortType] = React.useState<'asc' | 'desc'>('desc');
+  const [sortBy, setSortBy] = React.useState('');
+  const [values, setValues] = React.useState([
+    { jobTitle: 'adaylarla ilgili teknik odev hazirlamam gerekiyor', priority: 'Urgent' },
+    { jobTitle: 'leblelalsdasd', priority: 'Urgent' },
+    { jobTitle: 'yapilan islere ilgili activity kayitlari olusturmak', priority: 'Trivial' },
+
+    { jobTitle: 'waewqqe', priority: 'Trivial' },
+    { jobTitle: 'teknik tasklari planlayacagim', priority: 'Regular' },
+    { jobTitle: 'zxczxc', priority: 'Regular' },
+  ]);
+
+  const { filteredValues, isFiltered, renderFilter } = useJobFilter(values);
+  /*
+  HomePage Lifecycle
+  */
   React.useEffect(() => {
     if (sortType === 'asc') {
       setValues(ArrayUtils.sortAsc(values, sortBy));
@@ -34,6 +39,10 @@ function HomePage() {
       setValues(ArrayUtils.sortDesc(values, sortBy));
     }
   }, [sortType, sortBy]);
+
+  /*
+  HomePage Functions
+  */
 
   return (
     <>
@@ -49,6 +58,10 @@ function HomePage() {
         />
 
         <div className="row">
+          <div className="col-12">
+            <h4>Job List</h4>
+          </div>
+          <div className="col-12">{renderFilter()}</div>
           <UITableComponent
             columns={[
               {
@@ -69,10 +82,10 @@ function HomePage() {
                 customRenderer: (item: { jobTitle: string; priority: string }) => {
                   return (
                     <>
-                      <UIButton>
+                      <UIButton className="btn-light">
                         <VscEdit />
                       </UIButton>
-                      <UIButton>
+                      <UIButton className="btn-light">
                         <VscTrash />
                       </UIButton>
                     </>
@@ -80,7 +93,7 @@ function HomePage() {
                 },
               },
             ]}
-            data={values}
+            data={isFiltered ? filteredValues : values}
             onSortChange={e => {
               setSortBy(e);
             }}
