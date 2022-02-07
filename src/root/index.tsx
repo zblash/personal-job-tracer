@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { render } from 'react-dom';
 import { I18nextProvider } from 'react-i18next';
-import 'bootstrap/dist/css/bootstrap.min.css';
+
+import '@/public/app.scss';
 import Modal from 'react-modal';
 import App from '@/app/index';
 

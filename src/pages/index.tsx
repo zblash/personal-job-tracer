@@ -15,7 +15,7 @@ export const RoutesList: IRoute[] = [{ path: '/', basePath: '/', component: Home
 
 const Routes = React.memo(() => {
   return (
-    <div>
+    <div className="mb-5">
       <Switch>
         {RoutesList.map(route => (
           <Route

@@ -59,7 +59,7 @@ function HomePage() {
     <>
       {!loading && (
         <div className="container">
-          <div className="col-12">
+          <div className="col-12 pt-3 mb-3">
             <h4>Create New Job</h4>
           </div>
 
@@ -70,9 +70,13 @@ function HomePage() {
             }}
           />
 
-          <div className="row">
-            <div className="col-12">
+          <div className="row mt-3 pt-4 border-top">
+            <div className="col-12 d-flex justify-content-between mb-3">
               <h4>Job List</h4>
+              <span>
+                {isFiltered ? `(${filteredValues.length}` : `(${values.length}`}
+                {`/${values.length})`}
+              </span>
             </div>
             <div className="col-12">{renderFilter()}</div>
             <UITableComponent
@@ -95,24 +99,26 @@ function HomePage() {
                   customRenderer: (item: { jobTitle: string; priority: string }) => {
                     return (
                       <>
-                        <UIButton
-                          onClick={() => {
-                            setIsEditPopupOpened(true);
-                            setSelectedJob(item);
-                          }}
-                          className="btn-light"
-                        >
-                          <VscEdit />
-                        </UIButton>
-                        <UIButton
-                          onClick={() => {
-                            setIsDeletePopupOpened(true);
-                            setSelectedJob(item);
-                          }}
-                          className="btn-light"
-                        >
-                          <VscTrash />
-                        </UIButton>
+                        <div className="d-flex flex-md-row flex-column justify-content-around">
+                          <UIButton
+                            onClick={() => {
+                              setIsEditPopupOpened(true);
+                              setSelectedJob(item);
+                            }}
+                            className="btn-light mb-2"
+                          >
+                            <VscEdit />
+                          </UIButton>
+                          <UIButton
+                            onClick={() => {
+                              setIsDeletePopupOpened(true);
+                              setSelectedJob(item);
+                            }}
+                            className="btn-light mb-2"
+                          >
+                            <VscTrash />
+                          </UIButton>
+                        </div>
                       </>
                     );
                   },
