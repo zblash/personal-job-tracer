@@ -2,7 +2,7 @@ import React from 'react';
 import Modal from 'react-modal';
 import { useForm, Controller } from 'react-hook-form';
 import { UIInput } from '@/components/input';
-import { ICreateJobRequest } from '@/utils/api/api-models';
+import { ICreateJobRequest, IPrioritySelectRequest } from '@/utils/api/api-models';
 import { UISelect } from '@/components/select';
 import { UIButton } from '@/components/button';
 import { useStateFromProp } from '@/utils/hooks';
@@ -11,7 +11,7 @@ export interface EditJobModalComponentProps {
   isOpened: boolean;
   onSubmit: (e: ICreateJobRequest) => void;
   jobDetail?: ICreateJobRequest;
-  options: { value: string; label: string }[];
+  options: IPrioritySelectRequest[];
   onClose: () => void;
 }
 
@@ -31,7 +31,7 @@ function EditJobModalComponent(props: EditJobModalComponentProps) {
   const { register, handleSubmit, control } = useForm();
 
   const onFormSubmit = React.useCallback(
-    (s: { jobTitle: string; jobPriority: { value: string; label: string } }) => {
+    (s: { jobTitle: string; jobPriority: IPrioritySelectRequest }) => {
       props.onSubmit({ jobTitle: s.jobTitle, priority: s.jobPriority.value });
       setIsOpened(false);
       props.onClose();

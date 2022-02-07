@@ -2,7 +2,7 @@ import * as React from 'react';
 import { VscEdit, VscTrash } from 'react-icons/vsc';
 import { UIButton } from '@/components/button';
 import { CreateJobFormComponent } from '@/components/create-job-form';
-import { ICreateJobRequest } from '@/utils/api/api-models';
+import { ICreateJobRequest, IPrioritySelectRequest } from '@/utils/api/api-models';
 import { UITableComponent } from '@/components/table';
 import { ArrayUtils } from '@/utils/arrays';
 import { useJobFilter } from '@/hooks/job-filter';
@@ -13,17 +13,18 @@ import { CookiesHelpers } from '@/utils/cookies-helper';
 
 function HomePage() {
   const [loading, setLoading] = React.useState<boolean>(false);
+  const [thereAreErrors, setThereAreErrors] = React.useState<boolean>(false);
   const [selectedJob, setSelectedJob] = React.useState<ICreateJobRequest>();
   const [isEditPopupOpened, setIsEditPopupOpened] = React.useState<boolean>(false);
   const [isDeletePopupOpened, setIsDeletePopupOpened] = React.useState<boolean>(false);
-  const [options, setOptions] = React.useState<{ value: string; label: string }[]>();
+  const [options, setOptions] = React.useState<IPrioritySelectRequest[]>();
   const [sortType, setSortType] = React.useState<'asc' | 'desc'>('desc');
   const [sortBy, setSortBy] = React.useState('');
   const [values, setValues] = React.useState<ICreateJobRequest[]>(
     CookiesHelpers.getCookie('jobs') ? CookiesHelpers.getCookie('jobs') : [],
   );
 
-  const { filteredValues, isFiltered, renderFilter } = useJobFilter(values);
+  const { filteredValues, isFiltered, renderFilter } = useJobFilter(values, options);
   /*
   HomePage Lifecycle
   */
@@ -42,6 +43,9 @@ function HomePage() {
       .then(data => {
         setOptions(data.priorities);
       })
+      .catch(() => {
+        setThereAreErrors(true);
+      })
       .finally(() => {
         setLoading(false);
       });
@@ -49,17 +53,38 @@ function HomePage() {
   /*
   HomePage Functions
   */
+  const changeValues = React.useCallback((arr: ICreateJobRequest[]) => {
+    setValues(arr);
+    CookiesHelpers.setCookie('jobs', arr);
+  }, []);
+
   const createJob = React.useCallback(
     (e: ICreateJobRequest) => {
-      setValues(prev => [...prev, e]);
-      CookiesHelpers.setCookie('jobs', [...values, e]);
+      const vals = [...values, e];
+      changeValues(vals);
     },
-    [values],
+    [values, changeValues],
+  );
+
+  const editJob = React.useCallback(
+    (e: ICreateJobRequest) => {
+      const vals = values.map(val => (e.jobTitle === val.jobTitle ? e : val));
+      changeValues(vals);
+    },
+    [values, changeValues],
+  );
+
+  const deleteJob = React.useCallback(
+    (e: ICreateJobRequest) => {
+      const vals = values.filter(val => e.jobTitle !== val.jobTitle);
+      changeValues(vals);
+    },
+    [values, changeValues],
   );
 
   return (
     <>
-      {!loading && (
+      {!loading && !thereAreErrors && (
         <div className="container">
           <div className="col-12 pt-3 mb-3">
             <h4>Create New Job</h4>
@@ -147,7 +172,7 @@ function HomePage() {
               setIsEditPopupOpened(false);
             }}
             options={options}
-            onSubmit={() => {}}
+            onSubmit={editJob}
             jobDetail={selectedJob}
             isOpened={isEditPopupOpened}
           />
@@ -155,12 +180,13 @@ function HomePage() {
             onClose={() => {
               setIsDeletePopupOpened(false);
             }}
-            onApprove={() => {}}
+            onApprove={deleteJob}
             jobDetail={selectedJob}
             isOpened={isDeletePopupOpened}
           />
         </div>
       )}
+      {thereAreErrors && <h1>Error encountered.</h1>}
     </>
   );
 }

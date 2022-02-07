@@ -41,9 +41,9 @@ function DeleteJobModalComponent(props: DeleteJobModalComponentProps) {
   return (
     <Modal isOpen={isOpened} contentLabel="Delete Job Modal" style={customStyles}>
       {props.jobDetail && (
-        <div className="row pb-5">
-          <div className="col-12 d-flex justify-content-center">
-            <BiErrorCircle color={Colors.red} width="42" height="42" />
+        <div className="row pb-3 pt-3">
+          <div className="col-12 mb-3 d-flex justify-content-center">
+            <BiErrorCircle color={Colors.red} size="42px" />
           </div>
 
           <div className="col-12 mb-3 d-flex justify-content-center">

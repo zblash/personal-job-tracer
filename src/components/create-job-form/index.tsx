@@ -2,13 +2,13 @@ import React from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { AiOutlinePlus } from 'react-icons/ai';
 import { UIInput } from '@/components/input';
-import { ICreateJobRequest } from '@/utils/api/api-models';
+import { ICreateJobRequest, IPrioritySelectRequest } from '@/utils/api/api-models';
 import { UISelect } from '@/components/select';
 import { UIButton } from '../button';
 
 export interface CreateJobFormComponentProps {
   onSubmit: (e: ICreateJobRequest) => void;
-  options: { value: string; label: string }[];
+  options: IPrioritySelectRequest[];
 }
 
 function CreateJobFormComponent(props: CreateJobFormComponentProps) {

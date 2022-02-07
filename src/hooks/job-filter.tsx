@@ -3,14 +3,15 @@ import { useStateFromProp } from '@/utils/hooks';
 import { UIInput } from '@/components/input';
 import { UISelect } from '@/components/select';
 import { ArrayUtils } from '@/utils/arrays';
+import { ICreateJobRequest, IPrioritySelectRequest } from '@/utils/api/api-models';
 
-export function useJobFilter(values: { jobTitle: string; priority: string }[]) {
-  const filterOptions = [
-    { value: 'All', label: 'Priority (All)' },
-    { value: 'Urgent', label: 'Acil' },
-    { value: 'Trivial', label: 'Normal' },
-    { value: 'Regular', label: 'Az' },
-  ];
+export function useJobFilter(values: ICreateJobRequest[], options: IPrioritySelectRequest[] = []) {
+  const filterOptions = React.useMemo(() => {
+    const placeholder = [{ value: 'All', label: 'Priority (All)' }];
+
+    return placeholder.concat(options);
+  }, [options]);
+
   const [selectedFilterOption, setSelectedFilterOption] = React.useState<{ value: string; label: string }>(
     filterOptions[0],
   );
