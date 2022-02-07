@@ -1,10 +1,14 @@
 import React from 'react';
+import Modal from 'react-modal';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { DeleteJobModalComponent } from '.';
 
 const jobDetail = { jobTitle: 'adaylarla ilgili teknik odev hazirlamam gerekiyor', priority: 'Urgent' };
 
 describe('DeleteJobModalComponent', () => {
+  beforeAll(() => {
+    Modal.setAppElement(document.createElement('div'));
+  });
   it('should render when opened', () => {
     const onCloseSpy = jest.fn();
     const onSubmitSpy = jest.fn();
