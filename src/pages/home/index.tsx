@@ -19,7 +19,7 @@ function HomePage() {
   const [isDeletePopupOpened, setIsDeletePopupOpened] = React.useState<boolean>(false);
   const [options, setOptions] = React.useState<IPrioritySelectRequest[]>();
   const [sortType, setSortType] = React.useState<'asc' | 'desc'>('desc');
-  const [sortBy, setSortBy] = React.useState('');
+  const [sortBy, setSortBy] = React.useState('priority');
   const [values, setValues] = React.useState<ICreateJobRequest[]>(
     CookiesHelpers.getCookie('jobs') ? CookiesHelpers.getCookie('jobs') : [],
   );
