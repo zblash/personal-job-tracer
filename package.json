@@ -11,6 +11,7 @@
     "tsc": "tsc",
     "dev": "cross-env NODE_ENV=development webpack-dev-server --config=webpack/development.js",
     "start": "node server.js",
+    "backend": "node backend.js",
     "test": "jest --coverage  --config=jest.config.js",
     "storybook": "cross-env NODE_ENV=development start-storybook -p 9009 -c stories/config -s public",
     "build-storybook": "cross-env NODE_ENV=development build-storybook -s public",

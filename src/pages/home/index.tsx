@@ -6,14 +6,11 @@ import { ICreateJobRequest } from '@/utils/api/api-models';
 import { UITableComponent } from '@/components/table';
 import { ArrayUtils } from '@/utils/arrays';
 import { useJobFilter } from '@/hooks/job-filter';
+import { getPriorities } from '@/utils/api/requests';
 
 function HomePage() {
-  const options = [
-    { value: 'Urgent', label: 'Acil' },
-    { value: 'Trivial', label: 'Normal' },
-    { value: 'Regular', label: 'Az' },
-  ];
-
+  const [loading, setLoading] = React.useState<boolean>(false);
+  const [options, setOptions] = React.useState<{ value: string; label: string }[]>();
   const [sortType, setSortType] = React.useState<'asc' | 'desc'>('desc');
   const [sortBy, setSortBy] = React.useState('');
   const [values, setValues] = React.useState([
@@ -39,6 +36,16 @@ function HomePage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sortType, sortBy]);
 
+  React.useEffect(() => {
+    setLoading(true);
+    getPriorities()
+      .then(data => {
+        setOptions(data.priorities);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, []);
   /*
   HomePage Functions
   */
@@ -49,12 +56,14 @@ function HomePage() {
         <div className="col-12">
           <h4>Create New Job</h4>
         </div>
-        <CreateJobFormComponent
-          options={options}
-          onSubmit={(e: ICreateJobRequest) => {
-            setValues(prev => [...prev, e]);
-          }}
-        />
+        {!loading && (
+          <CreateJobFormComponent
+            options={options}
+            onSubmit={(e: ICreateJobRequest) => {
+              setValues(prev => [...prev, e]);
+            }}
+          />
+        )}
 
         <div className="row">
           <div className="col-12">
