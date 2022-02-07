@@ -27,7 +27,7 @@ jest.mock('react-select', () => ({ options, value, onChange }) => {
   );
 });
 
-describe('UIInput', () => {
+describe('EditJobModalComponent', () => {
   it('should render when opened', () => {
     const onCloseSpy = jest.fn();
     const onSubmitSpy = jest.fn();
