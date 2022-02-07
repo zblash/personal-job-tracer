@@ -2,6 +2,9 @@
 
 This project is basically a todo app that works with cookies and basic backend. You should run the backend server before starting the project.
 
+!!This project developed and tested with Node@16.13.2.
+You can use other versions of NodeJs but there may be broken dependencies.
+
 ## Install
 
 ```sh
@@ -9,9 +12,10 @@ yarn
 ```
 
 or
+You need to run below command with -force flag because eslint's latest versions has a bug.
 
 ```sh
-npm install
+npm i -force
 ```
 
 ## Start Development Mode
