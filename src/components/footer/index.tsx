@@ -9,7 +9,7 @@ function FooterComponent() {
             <a href="https://github.com/zblash/personal-job-tracer" target="_blank" rel="noreferrer">
               Repository
             </a>
-            <span>© Yusuf Can Celik</span>
+            <span>© 2022 Yusuf Can Celik</span>
           </div>
         </div>
       </div>{' '}
