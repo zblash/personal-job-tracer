@@ -22,3 +22,21 @@
   line-height: 60px;
   background-color: $gray-lite;
 }
+
+.priority-text-wrapper {
+  .priority-text {
+    border-radius: 4px;
+    padding: 8px;
+    min-width: 75px;
+    color: $white;
+  }
+  .urgent {
+    background-color: $red;
+  }
+  .trivial {
+    background-color: $primary;
+  }
+  .regular {
+    background-color: $yellow;
+  }
+}

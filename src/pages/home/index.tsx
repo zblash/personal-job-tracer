@@ -92,16 +92,23 @@ function HomePage() {
                 {
                   Header: 'Priority',
                   accessor: 'priority',
+                  customRenderer: (item: ICreateJobRequest) => {
+                    return (
+                      <div className="d-flex justify-content-center priority-text-wrapper">
+                        <p className={`priority-text ${item.priority.toLowerCase()}`}>{item.priority}</p>
+                      </div>
+                    );
+                  },
                   sort: true,
                   sortType: sortBy === 'priority' ? sortType : 'desc',
                 },
                 {
                   Header: 'Action',
                   accessor: 'actions',
-                  customRenderer: (item: { jobTitle: string; priority: string }) => {
+                  customRenderer: (item: ICreateJobRequest) => {
                     return (
                       <>
-                        <div className="d-flex flex-md-row flex-column justify-content-around">
+                        <div className="d-flex flex-md-row flex-column justify-content-evenly">
                           <UIButton
                             onClick={() => {
                               setIsEditPopupOpened(true);
