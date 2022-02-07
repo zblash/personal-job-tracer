@@ -5,17 +5,13 @@
   "scripts": {
     "clean-dist": "rimraf dist/*",
     "build": "yarn run clean-dist && cross-env NODE_ENV=production webpack --config=webpack/production.js",
-    "lint": "eslint ./src/**/*.ts* ./tests/**/*.test.ts* --cache",
     "prettier": "prettier  --ignore-path ./.prettierignore  **/*.ts*",
-    "fix": "yarn prettier --write && yarn lint --fix",
     "tsc": "tsc",
     "dev": "cross-env NODE_ENV=development webpack-dev-server --config=webpack/development.js",
     "start": "node server.js",
     "backend": "node backend.js",
-    "test": "jest --coverage  --config=jest.config.js",
-    "storybook": "cross-env NODE_ENV=development start-storybook -p 9009 -c stories/config -s public",
-    "build-storybook": "cross-env NODE_ENV=development build-storybook -s public",
-    "check-rule": "yarn tsc && yarn lint && yarn prettier && yarn test"
+    "test": "jest --coverage  --config=jest.config.js"
+    
   },
   "author": "Yusuf Can Celik",
   "license": "MIT",
