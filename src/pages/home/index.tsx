@@ -1,13 +1,19 @@
 import * as React from 'react';
-import { useTranslation } from 'react-i18next';
-import { UIInput } from '@/components/input';
 import { UIButton } from '@/components/button';
-import { UISelect } from '@/components/select';
 import { CreateJobFormComponent } from '@/components/create-job-form';
 import { ICreateJobRequest } from '@/utils/api/api-models';
 import { UITableComponent } from '@/components/table';
 import { VscEdit, VscTrash } from 'react-icons/vsc';
+import { ArrayUtils } from '@/utils/arrays';
+
 function HomePage() {
+  const [sortType, setSortType] = React.useState<'asc' | 'desc'>('desc');
+  const [sortBy, setSortBy] = React.useState('');
+  const [values, setValues] = React.useState([
+    { jobTitle: 'adaylarla ilgili teknik odev hazirlamam gerekiyor', priority: 'Urgent' },
+    { jobTitle: 'yapilan islere ilgili activity kayitlari olusturmak', priority: 'Trivial' },
+    { jobTitle: 'teknik tasklari planlayacagim', priority: 'Regular' },
+  ]);
   /*
   HomePage Lifecycle
   */
@@ -20,12 +26,15 @@ function HomePage() {
     { value: 'Normal', label: 'Normal' },
     { value: 'Low', label: 'Az' },
   ];
-  const values = [
-    { jobTitle: 'Urgent', priority: 'Acil' },
-    { jobTitle: 'Urgent', priority: 'Acil' },
-    { jobTitle: 'Urgent', priority: 'Acil' },
-    { jobTitle: 'Urgent', priority: 'Acil' },
-  ];
+
+  React.useEffect(() => {
+    if (sortType === 'asc') {
+      setValues(ArrayUtils.sortAsc(values, sortBy));
+    } else {
+      setValues(ArrayUtils.sortDesc(values, sortBy));
+    }
+  }, [sortType, sortBy]);
+
   return (
     <>
       <div className="container">
@@ -46,13 +55,13 @@ function HomePage() {
                 Header: 'Name',
                 accessor: 'jobTitle',
                 sort: true,
-                sortType: 'desc',
+                sortType: sortBy === 'jobTitle' ? sortType : 'desc',
               },
               {
                 Header: 'Priority',
                 accessor: 'priority',
                 sort: true,
-                sortType: 'desc',
+                sortType: sortBy === 'priority' ? sortType : 'desc',
               },
               {
                 Header: 'Action',
@@ -73,10 +82,10 @@ function HomePage() {
             ]}
             data={values}
             onSortChange={e => {
-              console.log(e);
+              setSortBy(e);
             }}
             onSortTypeChange={e => {
-              console.log(e);
+              setSortType(e);
             }}
           />
         </div>
