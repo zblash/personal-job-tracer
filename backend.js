@@ -7,9 +7,9 @@ apiApp.get('/api/priorities', function (req, res) {
   res.header('Access-Control-Allow-Methods', '*');
   res.json({
     priorities: [
-      { value: 'Urgent', label: 'Acil' },
-      { value: 'Trivial', label: 'Normal' },
-      { value: 'Regular', label: 'Az' },
+      { value: 'Urgent', label: 'Urgent' },
+      { value: 'Trivial', label: 'Trivial' },
+      { value: 'Regular', label: 'Regular' },
     ],
   });
 });

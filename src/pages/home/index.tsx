@@ -9,6 +9,7 @@ import { useJobFilter } from '@/hooks/job-filter';
 import { getPriorities } from '@/utils/api/requests';
 import { EditJobModalComponent } from '@/components/edit-job-modal';
 import { DeleteJobModalComponent } from '@/components/delete-job-modal';
+import { CookiesHelpers } from '@/utils/cookies-helper';
 
 function HomePage() {
   const [loading, setLoading] = React.useState<boolean>(false);
@@ -18,15 +19,9 @@ function HomePage() {
   const [options, setOptions] = React.useState<{ value: string; label: string }[]>();
   const [sortType, setSortType] = React.useState<'asc' | 'desc'>('desc');
   const [sortBy, setSortBy] = React.useState('');
-  const [values, setValues] = React.useState<ICreateJobRequest[]>([
-    { jobTitle: 'adaylarla ilgili teknik odev hazirlamam gerekiyor', priority: 'Urgent' },
-    { jobTitle: 'leblelalsdasd', priority: 'Urgent' },
-    { jobTitle: 'yapilan islere ilgili activity kayitlari olusturmak', priority: 'Trivial' },
-
-    { jobTitle: 'waewqqe', priority: 'Trivial' },
-    { jobTitle: 'teknik tasklari planlayacagim', priority: 'Regular' },
-    { jobTitle: 'zxczxc', priority: 'Regular' },
-  ]);
+  const [values, setValues] = React.useState<ICreateJobRequest[]>(
+    CookiesHelpers.getCookie('jobs') ? CookiesHelpers.getCookie('jobs') : [],
+  );
 
   const { filteredValues, isFiltered, renderFilter } = useJobFilter(values);
   /*
@@ -54,6 +49,13 @@ function HomePage() {
   /*
   HomePage Functions
   */
+  const createJob = React.useCallback(
+    (e: ICreateJobRequest) => {
+      setValues(prev => [...prev, e]);
+      CookiesHelpers.setCookie('jobs', [...values, e]);
+    },
+    [values],
+  );
 
   return (
     <>
@@ -66,7 +68,7 @@ function HomePage() {
           <CreateJobFormComponent
             options={options}
             onSubmit={(e: ICreateJobRequest) => {
-              setValues(prev => [...prev, e]);
+              createJob(e);
             }}
           />
 
