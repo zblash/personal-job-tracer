@@ -28,11 +28,13 @@ export function useJobFilter(values: { jobTitle: string; priority: string }[]) {
       isTitleFiltered = true;
     }
     if (e.value !== 'All') {
+      // eslint-disable-next-line testing-library/await-async-query
       vals = ArrayUtils.findByField(vals, 'priority', e.value);
       isPriorityFiltered = true;
     }
     setFilteredValues(vals);
     setIsFiltered(isTitleFiltered || isPriorityFiltered);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const renderFilter = React.useCallback(() => {
@@ -64,7 +66,7 @@ export function useJobFilter(values: { jobTitle: string; priority: string }[]) {
         </div>
       </div>
     );
-  }, [selectedFilterOption, filterTitle]);
+  }, [filterOptions, filterTitle, onFilterChanged, selectedFilterOption]);
 
   return { filteredValues, isFiltered, renderFilter };
 }

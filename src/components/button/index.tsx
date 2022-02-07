@@ -1,8 +1,8 @@
-import React, { InputHTMLAttributes } from 'react';
+/* eslint-disable react/button-has-type */
+import React from 'react';
 
 interface UIButtonProps {
   border?: string;
-  color?: string;
   height?: string;
   onClick?: () => void;
   radius?: string;

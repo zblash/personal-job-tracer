@@ -1,7 +1,7 @@
 import * as React from 'react';
+import { GoChevronDown as UIDownChevronIcon, GoChevronUp as UIChevronUpIcon } from 'react-icons/go';
 import { useStateFromProp } from '@/utils/hooks';
 import { UIButton } from '@/components/button';
-import { GoChevronDown as UIDownChevronIcon, GoChevronUp as UIChevronUpIcon } from 'react-icons/go';
 
 /* TableColumnSortComponent Helpers */
 type SortType = 'asc' | 'desc';
@@ -22,7 +22,8 @@ function TableColumnSortComponent(props: React.PropsWithChildren<TableColumnSort
     const sort = sortType === 'desc' ? 'asc' : 'desc';
     setSortType(sort);
     props.onSortChange(props.item, sort);
-  }, [sortType, props.onSortChange]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [sortType, props]);
 
   return (
     <div className="w-100 justify-content-center d-flex">

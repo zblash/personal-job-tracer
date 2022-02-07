@@ -34,8 +34,8 @@ describe('UITableComponent', () => {
     const tdElements = trElements[0].querySelectorAll('td');
     expect(labelHeaderElement).toBeInTheDocument();
     expect(valueHeaderElement).toBeInTheDocument();
-    expect(trElements.length).toBe(3);
-    expect(tdElements.length).toBe(2);
+    expect(trElements).toHaveLength(3);
+    expect(tdElements).toHaveLength(2);
   });
 
   it('should render correctly with custom renderer', () => {
@@ -88,6 +88,9 @@ describe('UITableComponent', () => {
     fireEvent.click(sortChangeButton);
     await waitFor(() => {
       expect(onSortChangeSpy).toHaveBeenCalledWith('label');
+    });
+
+    await waitFor(() => {
       expect(onSortTypeChangeSpy).toHaveBeenCalledWith('desc');
     });
   });

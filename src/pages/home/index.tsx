@@ -1,12 +1,10 @@
 import * as React from 'react';
+import { VscEdit, VscTrash } from 'react-icons/vsc';
 import { UIButton } from '@/components/button';
 import { CreateJobFormComponent } from '@/components/create-job-form';
 import { ICreateJobRequest } from '@/utils/api/api-models';
 import { UITableComponent } from '@/components/table';
-import { VscEdit, VscTrash } from 'react-icons/vsc';
 import { ArrayUtils } from '@/utils/arrays';
-import { UIInput } from '@/components/input';
-import { UISelect } from '@/components/select';
 import { useJobFilter } from '@/hooks/job-filter';
 
 function HomePage() {
@@ -38,6 +36,7 @@ function HomePage() {
     } else {
       setValues(ArrayUtils.sortDesc(values, sortBy));
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sortType, sortBy]);
 
   /*

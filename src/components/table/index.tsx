@@ -4,6 +4,7 @@ import { TableColumnSortComponent } from './sort';
 
 /* TableColumnSortComponent Helpers */
 export type UITableSortTypes = 'asc' | 'desc';
+
 export type UITableCustomRendererTypes = React.ReactElement | string | number;
 interface UITableColumnProps<T> {
   Header: string;

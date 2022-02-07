@@ -24,6 +24,8 @@ export const ArrayUtils = (function () {
       if (typeof field === 'number') {
         return stringNum(a[field], b[field]);
       }
+
+      return 0;
     });
 
     return sortableArr;

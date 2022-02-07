@@ -1,5 +1,6 @@
+/* eslint-disable no-shadow */
 import React from 'react';
-import { render, act, screen, fireEvent, waitFor } from '@testing-library/react';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { CreateJobFormComponent } from '.';
 
 const options = [
