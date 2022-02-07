@@ -29,7 +29,7 @@ function CreateJobFormComponent(props: CreateJobFormComponentProps) {
   return (
     <form onSubmit={handleSubmit(onFormSubmit)}>
       <div className="row">
-        <div className="col-6">
+        <div className="col-12 col-md-6 col-lg-6 col-xl-6">
           <UIInput
             labelKey="Job Name"
             labelClassName="font-weight-bold"
@@ -42,7 +42,7 @@ function CreateJobFormComponent(props: CreateJobFormComponentProps) {
             errorKey={errors.jobTitle?.message}
           />
         </div>
-        <div className="col-4">
+        <div className="col-12 mb-4 col-md-4 col-lg-4 col-xl-4">
           <Controller
             control={control}
             name="jobPriority"
@@ -63,7 +63,7 @@ function CreateJobFormComponent(props: CreateJobFormComponentProps) {
             )}
           />
         </div>
-        <div className="col-2 d-flex align-items-center">
+        <div className="col-12 col-md-2 col-lg-2 col-xl-2 d-flex align-items-center justify-content-end">
           <UIButton className="btn-primary" type="submit">
             <AiOutlinePlus /> Create
           </UIButton>

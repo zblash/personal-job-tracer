@@ -42,7 +42,7 @@ export function useJobFilter(values: { jobTitle: string; priority: string }[]) {
   const renderFilter = React.useCallback(() => {
     return (
       <div className="row">
-        <div className="col-8">
+        <div className="col-12 col-md-8 col-lg-8 col-xl-8 mb-3">
           <UIInput
             labelClassName="font-weight-bold"
             type="text"
@@ -54,7 +54,7 @@ export function useJobFilter(values: { jobTitle: string; priority: string }[]) {
             }}
           />
         </div>
-        <div className="col-4">
+        <div className="col-12 col-md-4 col-lg-4 col-xl-4">
           <UISelect
             labelClassName="font-weight-bold"
             options={filterOptions}
